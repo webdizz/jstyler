@@ -3,11 +3,14 @@ Manifest.txt
 PostInstall.txt
 README.rdoc
 Rakefile
+lib/formatter-0.0.1.jar
 lib/jstyler.rb
+lib/jstyler/formatter.rb
 script/console
 script/destroy
 script/generate
 spec/jstyler_spec.rb
+spec/formatter_spec.rb
 spec/spec.opts
 spec/spec_helper.rb
 tasks/rspec.rake

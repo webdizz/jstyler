@@ -7,4 +7,13 @@ rescue LoadError
 end
 
 $:.unshift(File.dirname(__FILE__) + '/../lib')
+
+require 'rubygems'
+
+require 'buildr'
+require 'buildr/packaging/artifact'
+
 require 'jstyler'
+require 'jstyler/formatter'
+
+
