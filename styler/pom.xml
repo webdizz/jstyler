@@ -1,0 +1,109 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>name.webdizz.styler</groupId>
+	<artifactId>styler</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<description>The Java code formatter for BuildR</description>
+
+	<properties>
+		<javac.version>1.5</javac.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.eclipse.equinox.app</groupId>
+			<artifactId>equinox.app</artifactId>
+			<version>1.2.1.R35x_v20091203</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.equinox</groupId>
+			<artifactId>common</artifactId>
+			<version>3.5.1.r35x_v20090807</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.osgi.framework</groupId>
+			<artifactId>osgi</artifactId>
+			<version>3.5.2.R35x_v20100126</version>
+		</dependency>
+		<dependency>
+			<groupId>oeg.eclipse.jdt.core</groupId>
+			<artifactId>jdt.core</artifactId>
+			<version>3.6.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.text</groupId>
+			<artifactId>text</artifactId>
+			<version>3.5.0.v20090513</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.core</groupId>
+			<artifactId>resources</artifactId>
+			<version>3.5.2.r35x_v20091203</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.core</groupId>
+			<artifactId>jobs</artifactId>
+			<version>3.4.100.v20090429</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.7</version>
+			<scope>test</scope>
+		</dependency>
+		
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<artifactId>maven-jar-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<artifactId>maven-dependency-plugin</artifactId>
+			</plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>2.1</version>
+					<configuration>
+						<source>${javac.version}</source>
+						<target>${javac.version}</target>
+						<meminitial>1024m</meminitial>
+						<maxmem>1024m</maxmem>
+						<optimize>false</optimize>
+						<debug>true</debug>
+						<fork>false</fork>
+					</configuration>
+				</plugin>
+				<plugin>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>2.3</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>2.4.2</version>
+					<configuration>
+						<encoding>UTF-8</encoding>
+					</configuration>
+				</plugin>
+				<plugin>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<version>2.1</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>
