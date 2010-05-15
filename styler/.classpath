@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="test"/>
+	<classpathentry kind="src" path="fixture"/>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/main/test"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.jdt.core"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry exported="true" kind="lib" path="lib/org.eclipse.equinox.app_1.2.1.R35x_v20091203.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.osgi_3.5.2.R35x_v20100126.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.jdt.core"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
