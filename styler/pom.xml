@@ -21,16 +21,16 @@
 			<artifactId>common</artifactId>
 			<version>3.5.1.r35x_v20090807</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.osgi.framework</groupId>
 			<artifactId>osgi</artifactId>
 			<version>3.5.2.R35x_v20100126</version>
 		</dependency>
 		<dependency>
-			<groupId>oeg.eclipse.jdt.core</groupId>
+			<groupId>org.eclipse.jdt.core</groupId>
 			<artifactId>jdt.core</artifactId>
-			<version>3.6.0</version>
+			<version>3.6.0-customized</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.text</groupId>
@@ -47,14 +47,14 @@
 			<artifactId>jobs</artifactId>
 			<version>3.4.100.v20090429</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.7</version>
 			<scope>test</scope>
 		</dependency>
-		
+
 
 	</dependencies>
 
@@ -65,12 +65,38 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<mainClass>name.webdizz.styler.StylerRunner</mainClass>
+							<classpathLayoutType>custom</classpathLayoutType>
+							<customClasspathLayout>lib/$${artifact.artifactId}-$${artifact.version}$${dashClassifier?}.$${artifact.extension}</customClasspathLayout>
+						</manifest>
+					</archive>
+				</configuration>
 			</plugin>
 			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
 			</plugin>
 			<plugin>
 				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/classes/lib</outputDirectory>
+							<overWriteReleases>true</overWriteReleases>
+							<overWriteSnapshots>true</overWriteSnapshots>
+							<overWriteIfNewer>true</overWriteIfNewer>
+							<includeScope>compile</includeScope>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 		<pluginManagement>
