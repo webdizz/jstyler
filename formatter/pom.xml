@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>name.webdizz.styler</groupId>
+	<groupId>name.webdizz.jstyler</groupId>
 	<artifactId>formatter</artifactId>
 	<version>0.0.1</version>
 	<description>The Java code formatter for BuildR extension.</description>
@@ -67,11 +67,17 @@
 				<artifactId>maven-jar-plugin</artifactId>
 				<configuration>
 					<archive>
+						<addMavenDescriptor>false</addMavenDescriptor>
+						<compress>false</compress>
+						<index>true</index>
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<mainClass>name.webdizz.styler.StylerRunner</mainClass>
+							<!--
 							<classpathLayoutType>custom</classpathLayoutType>
 							<customClasspathLayout>lib/$${artifact.artifactId}-$${artifact.version}$${dashClassifier?}.$${artifact.extension}</customClasspathLayout>
+							-->
+							<classpathPrefix>lib/</classpathPrefix>
 						</manifest>
 					</archive>
 				</configuration>
