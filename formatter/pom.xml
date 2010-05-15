@@ -2,9 +2,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>name.webdizz.styler</groupId>
-	<artifactId>styler</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<description>The Java code formatter for BuildR</description>
+	<artifactId>formatter</artifactId>
+	<version>0.0.1</version>
+	<description>The Java code formatter for BuildR extension.</description>
 
 	<properties>
 		<javac.version>1.5</javac.version>
