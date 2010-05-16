@@ -1,0 +1,16 @@
+require 'jstyler'
+
+VERSION_NUMBER = '1.0'
+
+define 'testsrc' do
+	
+	extend Jstyler::Beautify
+
+	project.version = VERSION_NUMBER
+  	project.group = 'name.webdizz.jstyler'
+
+	compile.options.target = '1.5'
+
+	package :jar
+
+end
