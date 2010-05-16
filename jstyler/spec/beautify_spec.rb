@@ -32,13 +32,20 @@ describe Beautify, "when is being ran" do
     @beautify.run({:config=>"somepath"}, 'nilsrc', 'sbfdgb').should be_false
   end
   
+  it "should error if there is no JAVA_HOME environment var" do
+    previous = ENV['JAVA_HOME']
+    ENV.delete('JAVA_HOME')
+    @beautify.run({:config=>@config}, @src).should be_false
+    ENV['JAVA_HOME'] = previous
+  end
+  
   it "should have flatten to string source arguments" do
     @beautify.run({:config=>"somepath"}, 'fixture', 'sss').should be_false
     @beautify.run({:config=>@config}, @src).should be_true
     @beautify.run({:config=>@config}, @src, @src).should include @src
   end
   
-  it "should contain config attribute in the command line string" do
+  it "should contain prepared command line attributes as a string" do
     res = @beautify.run({:config=>@config, :verbose=>''}, @src)
     res.should be_true
     res.should include "-config"

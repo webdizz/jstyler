@@ -17,16 +17,27 @@ module Jstyler
       #   run = hash, src (hash - {:config=>config_file, :verbose=>true })
       def run(options, *srcs)
         options = { :config=>options } unless Hash === options
+        current_dir = Dir.pwd
         
         #validation
         result = validate_config_path options
         result = validate_source_directory srcs if result
+        result = validate_env if result
         
         #prepare call
         execution_string = ''
         if result
           execution_string = flatten_sources srcs
           execution_string = flatten_options(options) + execution_string
+          # change directory to run command
+          fromatter = Formatter.new
+          fromatter.extract if File.exist? JAVA_LIBS
+          
+          puts ENV['JAVA_HOME']
+          Dir.chdir(JAVA_LIBS)
+          
+          #change dir to previous one
+          Dir.chdir(current_dir)
           result = execution_string
         end
         
@@ -49,6 +60,15 @@ module Jstyler
         
         src_string
       end
+      
+      def validate_env
+        if !ENV.has_key?('JAVA_HOME')
+          puts "There is no JAVA_HOME in your environment"
+          return false
+        end
+        return true
+      end
+      private :validate_env
       
       def validate_source_directory srcs
         if !srcs.empty? && srcs.uniq.flatten.each { |item| return File.exist?(item) }

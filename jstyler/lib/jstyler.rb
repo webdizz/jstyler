@@ -4,11 +4,14 @@ $:.unshift(File.dirname(__FILE__)) unless
 module Jstyler
   VERSION = '0.0.1'
   
-  GEM_DIRECTORY = File.dirname(__FILE__)+'/../'
+  GEM_DIRECTORY = File.expand_path(File.dirname(__FILE__)+'/../')
+  
+  FORMATTER_LIB = 'formatter-0.0.1.jar'
   
   # The dependency path
-  FORMATTER_LIB_PATH = File.dirname(__FILE__) + '/formatter-0.0.1.jar'
+  FORMATTER_LIB_PATH = File.expand_path(File.dirname(__FILE__) + '/'+FORMATTER_LIB)
   
+  JAVA_LIBS = File.expand_path(File.dirname(__FILE__)+'/../javalibs')
   
 end
 
