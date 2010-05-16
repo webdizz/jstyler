@@ -1,32 +1,45 @@
 = jstyler
 
-* http://github.com/#{github_username}/#{project_name}
+* http://github.com/webdizz/jstyler
+* http://webdizz.name/
 
 == DESCRIPTION:
 
-FIX (describe your package)
+This is an extension for BuildR to provide abilities to format Java source code according to conventions.
+This extension uses built-in Eclipse functionality to format code, but without requirement to have installed Eclipse.
 
 == FEATURES/PROBLEMS:
 
-* FIX (list of features or problems)
+- Currently still problem to define custom configuration properties for formatter within project. 
 
 == SYNOPSIS:
 
-  FIX (code sample of usage)
+# Sample project buildfile
+require 'jstyler' # include extension
+define 'testsrc' do	
+	extend Jstyler::Beautify #extend only this project
+	project.version = 1.0
+  	project.group = 'name.webdizz.jstyler'
+	compile.options.target = '1.5'
+	package :jar
+end  
 
 == REQUIREMENTS:
 
-* FIX (list of requirements)
+* session
+* buildr
 
 == INSTALL:
 
-* FIX (sudo gem install, anything else)
+* sudo gem install jstyler
 
 == LICENSE:
 
+Third-party dependencies are under Eclipse Public License v1.0
+
 (The MIT License)
 
-Copyright (c) 2010 FIXME full name
+Copyright (c) 2010 Izzet Mustafaiev
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
