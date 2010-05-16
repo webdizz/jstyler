@@ -1,6 +1,7 @@
 # beautify.rb
 
 require 'buildr'
+require 'session'
 
 module Jstyler
   
@@ -33,10 +34,16 @@ module Jstyler
           fromatter = Formatter.new
           fromatter.extract if File.exist? JAVA_LIBS
           
-          puts ENV['JAVA_HOME']
           Dir.chdir(JAVA_LIBS)
+          java = File.expand_path ENV['JAVA_HOME']+'/bin/java'
+          cmd = "#{java} -jar #{FORMATTER_LIB} #{execution_string} "
+          shell = Session::Shell.new
+          stdout, stderr = shell.execute cmd
+          status = shell.status 
+          puts stdout
+          puts stderr if !status
           
-          #change dir to previous one
+          #change directory to previous one
           Dir.chdir(current_dir)
           result = execution_string
         end
