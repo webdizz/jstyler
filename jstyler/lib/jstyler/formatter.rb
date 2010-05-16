@@ -25,18 +25,20 @@ module Jstyler
       result = false
       if File.exists? artifact.to_s
         zip_file = expand_path artifact.to_s
+        # create java libs directory if does not exist
+        Dir.mkdir $JAVA_LIBS if ! File.exist? $JAVA_LIBS
         
         # extract libs from jar under lib directory
         Zip::ZipFile.open(zip_file.to_s) do |zip|
           zip.each { |f|
             if f.name.include? "lib/" or f.name.include? ".core.prefs"
-              f_path=File.join(JAVA_LIBS, f.name)
+              f_path=File.join($JAVA_LIBS, f.name)
               FileUtils.mkdir_p(File.dirname(f_path))
               zip.extract(f, f_path) unless File.exist?(f_path)
             end
           }
         end
-        FileUtils.cp zip_file, JAVA_LIBS
+        FileUtils.cp zip_file, $JAVA_LIBS
         result = true
       end
       result

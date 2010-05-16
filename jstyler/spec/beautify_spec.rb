@@ -4,11 +4,11 @@ include Jstyler
 include Jstyler::Beautify
 include Buildr
 
-describe Beautify, "when is being ran" do
+describe BeautifyRunner, "when is being ran" do
   
   before do
-    @beautify = Beautify.new
-    @config = File.expand_path JAVA_LIBS+'/org.eclipse.jdt.core.prefs'
+    @beautify = BeautifyRunner.new
+    @config = File.expand_path $JAVA_LIBS+'/org.eclipse.jdt.core.prefs'
     @src = File.expand_path File.dirname(__FILE__)+'/fixture'
   end
   

@@ -11,7 +11,9 @@ module Jstyler
   # The dependency path
   FORMATTER_LIB_PATH = File.expand_path(File.dirname(__FILE__) + '/'+FORMATTER_LIB)
   
-  JAVA_LIBS = File.expand_path(File.dirname(__FILE__)+'/../javalibs')
+  $JAVA_LIBS = File.expand_path(File.dirname(__FILE__)+'/../javalibs')
   
 end
 
+require 'jstyler/formatter'
+require 'jstyler/beautify'
