@@ -12,4 +12,4 @@ require 'rubygems'
 
 require 'jstyler'
 require 'jstyler/formatter'
-
+require 'jstyler/beautify'
