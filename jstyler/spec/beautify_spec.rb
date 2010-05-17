@@ -67,7 +67,7 @@ describe BeautifyRunner, "when is being ran" do
   end
   
   it "should prevent passing not supported configuration options" do
-    res = @beautify.run({:config=>@config, :verbose=>'', :someother_property=>'someother_property', :some=>''}, @src)
+    res = @beautify.run({:config=>@config, :verbose=>'true', :someother_property=>'someother_property', :some=>''}, @src)
     res.should be_true
     res.should_not include '-someother_property'
     res.should_not include '-some'

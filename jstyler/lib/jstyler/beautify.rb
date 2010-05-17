@@ -115,6 +115,7 @@ module Jstyler
         options_to_check = [].concat @options.keys
         options_to_check.each{|key|
           @options.delete key if !(@allowed_options.include? key.to_s)
+          @options[key] = '' if key.to_s == 'verbose' #verbose value should be empty
         }
         return true
       end
