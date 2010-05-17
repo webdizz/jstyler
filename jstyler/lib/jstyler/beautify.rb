@@ -13,15 +13,21 @@ module Jstyler
       
       include Jstyler
       
+      def initialize
+        @conventions = ['java', 'eclipse']
+        @allowed_options = ['config', 'convention', 'verbose']
+      end
+      
       #  :call-seq:
       #   run = config_file, src/ src2
       #   run = hash, src (hash - {:config=>config_file, :verbose=>true })
-      def run(options, *srcs)
-        options = { :config=>options } unless Hash === options
+      def run(config_options, *srcs)
+        @options = { :config=>config_options } unless Hash === config_options
+        @options = config_options if @options == nil
         current_dir = Dir.pwd
         
         #validation
-        result = validate_config_path options
+        result = validate_config_path @options
         result = validate_source_directory srcs if result
         result = validate_env if result
         
@@ -29,7 +35,7 @@ module Jstyler
         execution_string = ''
         if result
           execution_string = flatten_sources srcs
-          execution_string = flatten_options(options) + execution_string
+          execution_string = flatten_options(@options) + execution_string
           # change directory to run command
           Dir.mkdir $JAVA_LIBS if ! File.exist? $JAVA_LIBS
           fromatter = Formatter.new
@@ -78,8 +84,8 @@ module Jstyler
       end
       private :validate_env
       
-      def validate_source_directory srcs
-        if !srcs.empty? && srcs.uniq.flatten.each { |item| return File.exist?(item) }
+      def validate_source_directory sources
+        if ! sources.empty? && sources.uniq.flatten.each { |item| return ! item.nil? && File.exist?(item) }
           puts "Source(s) directory(ies) cannot be accessed"
           return false
         end
@@ -87,16 +93,29 @@ module Jstyler
       end
       private :validate_source_directory
       
-      def validate_config_path options
+      def validate_config_path config_options
         #validation
-        if !options.has_key?(:config)
-          puts "Config path need to be defined"
-          return false
+        # use default convention (Java)
+        if ! config_options.has_key?(:config) && ! config_options.has_key?(:convention) 
+          puts "Config path and convention were not defined, will use Java convention."
+          @options[:config] = File.expand_path GEM_DIRECTORY+'/conventions/java.prefs'
         end
-        if !File.exist? options.fetch(:config).to_s
+        # use specified built-in convention
+        if ! config_options.has_key?(:config) && config_options.has_key?(:convention)
+          convention = "#{config_options.fetch(:convention)}".downcase
+          puts "Convention '#{convention}' was defined."
+          @options[:config] = ''
+          @options[:config] = File.expand_path(GEM_DIRECTORY+"/conventions/#{convention}.prefs") if @conventions.include?(convention)
+          @options.delete :convention
+        end
+        if !File.exist? @options.fetch(:config).to_s
           puts "Config path does not exist"
           return false
         end
+        options_to_check = [].concat @options.keys
+        options_to_check.each{|key|
+          @options.delete key if !(@allowed_options.include? key.to_s)
+        }
         return true
       end
       private :validate_config_path
@@ -109,20 +128,22 @@ module Jstyler
     end
     
     before_define do |project|
-      task 'format' do |task|
-        puts "Perform formatting...."
-        $JAVA_LIBS = File.expand_path project.target
-        runner = BeautifyRunner.new
-        config = File.expand_path 'jstyler.prefs'
-        puts "Save eclipse preferences within project directory with name 'jstyler.prefs'" if ! File.exist? config
-        puts "Define project.jstyler property for your project as {:config=>path_to_config,:verbose=>''}" if project.jstyler.nil?
-        runner.run({:config=>'jstyler.prefs'}, project.compile.sources)
-      end
+      
     end
     
     after_define do |project|
+      
+      task 'format' do |task|
+        puts "Perform formatting...."
+        $JAVA_LIBS = File.expand_path project.target
+        
+        runner = BeautifyRunner.new
+        #config = File.expand_path 'jstyler.prefs'
+        #puts "Save eclipse preferences within project directory with name 'jstyler.prefs'" if ! File.exist? config
+        #puts "Define project.jstyler property for your project as {:config=>path_to_config,:verbose=>''}" if project.jstyler.nil?
+        runner.run(project.jstyler.options, project.compile.sources)
+      end
     end
-    
     
   end  
   

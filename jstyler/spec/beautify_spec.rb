@@ -17,9 +17,22 @@ describe BeautifyRunner, "when is being ran" do
     @beautify.run({}, '').should be_false
   end
   
-  it "should error if config was not defined" do
-    @beautify.run({}, "src").should be_false
-    @beautify.run({:verbose=>''}, "src").should be_false
+  it "should use built-in default config if it and convention attributes were not defined" do
+    res = @beautify.run({}, @src)
+    res.should be_true
+    res.should include '-config'
+  end
+  
+  it "should not pass -convention attribute to java" do
+    res = @beautify.run({:convention=>:Java}, @src)
+    res.should be_true
+    res.should include '-config'
+    res.should_not include '-convention'
+  end
+  
+  it "should fail if -convention attribute does not exist" do
+    res = @beautify.run({:convention=>:Java_custom}, @src)
+    res.should be_false
   end
   
   it "should error if config does not exist" do
@@ -40,9 +53,9 @@ describe BeautifyRunner, "when is being ran" do
   end
   
   it "should have flatten to string source arguments" do
-    @beautify.run({:config=>"somepath"}, 'fixture', 'sss').should be_false
-    @beautify.run({:config=>@config}, @src).should be_true
-    @beautify.run({:config=>@config}, @src, @src).should include @src
+    res = @beautify.run({:config=>@config}, @src, @src)
+    res.should_not be_false
+    res.should include @src
   end
   
   it "should contain prepared command line attributes as a string" do
@@ -51,6 +64,15 @@ describe BeautifyRunner, "when is being ran" do
     res.should include "-config"
     res.should include @config
     res.should include "-verbose"
+  end
+  
+  it "should prevent passing not supported configuration options" do
+    res = @beautify.run({:config=>@config, :verbose=>'', :someother_property=>'someother_property', :some=>''}, @src)
+    res.should be_true
+    res.should_not include '-someother_property'
+    res.should_not include '-some'
+    res.should include 'config'
+    res.should include 'verbose'
   end
   
 end
