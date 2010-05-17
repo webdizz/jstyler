@@ -2,3 +2,4 @@
 
 * Make jstyler more configurable, via project or global scopes.
 * Avoid reformatting already formatted and unchanged file.
+* Build-in configs from Eclipse to be able to define convention name for formatting.

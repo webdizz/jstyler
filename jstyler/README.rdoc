@@ -1,28 +1,37 @@
 = jstyler
 
-* http://github.com/webdizz/jstyler
-* http://webdizz.name/
+* http://webdizz.name/posts/jstyler
 
 == DESCRIPTION:
 
 This is an extension for BuildR to provide abilities to format Java source code according to conventions.
-This extension uses built-in Eclipse functionality to format code, but without requirement to have installed Eclipse.
+This extension uses built-in Eclipse functionality to format code, but without requirements to have installed Eclipse.
 
 == FEATURES/PROBLEMS:
 
-- Currently still problem to define custom configuration properties for formatter within project. 
+- Configuration options can be defined within ~/.buildr/settings.yaml or per project folder in the build.yaml files.
+- There are abilities to define custom configuration properties for formatter within project buildfile per all projects and override for appropriate one.
+  jstyler.options[:config]  - receives path to config file with formatting style definition (Eclipse generated).
+  jstyler.options[:verbose] - if is specified output should be more detailed
+  jstyler.options[:convention] - java or eclipse - which convention should be used if config path was not specified, by default java is used. 
 
 == SYNOPSIS:
 
 # Sample project buildfile
 require 'jstyler' # include extension
+
+jstyler.options[:config] = "path_to_config"
+
 define 'testsrc' do	
-	extend Jstyler::Beautify #extend only this project
+	# extend Jstyler::Beautify #to extend buildr only for this project
 	project.version = 1.0
   	project.group = 'name.webdizz.jstyler'
 	compile.options.target = '1.5'
 	package :jar
 end  
+
+# To frmat code run:
+$ buildr format
 
 == REQUIREMENTS:
 

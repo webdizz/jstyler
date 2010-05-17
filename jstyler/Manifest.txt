@@ -7,10 +7,13 @@ README
 README.rdoc
 Rakefile
 TODO
+conventions/eclipse.prefs
+conventions/java.prefs
 lib/formatter-0.0.1.jar
 lib/jstyler.rb
 lib/jstyler/beautify.rb
 lib/jstyler/formatter.rb
+lib/jstyler/settings.rb
 script/console
 script/destroy
 script/generate
