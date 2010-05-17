@@ -136,12 +136,9 @@ module Jstyler
       
       task 'format' do |task|
         puts "Perform formatting...."
-        $JAVA_LIBS = File.expand_path project.target
+        $JAVA_LIBS = File.expand_path project.path_to :target
         
         runner = BeautifyRunner.new
-        #config = File.expand_path 'jstyler.prefs'
-        #puts "Save eclipse preferences within project directory with name 'jstyler.prefs'" if ! File.exist? config
-        #puts "Define project.jstyler property for your project as {:config=>path_to_config,:verbose=>''}" if project.jstyler.nil?
         runner.run(project.jstyler.options, project.compile.sources)
       end
     end
