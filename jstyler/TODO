@@ -1,0 +1,4 @@
+== TODO list
+
+* Make jstyler more configurable, via project or global scopes.
+* Avoid reformatting already formatted and unchanged file.

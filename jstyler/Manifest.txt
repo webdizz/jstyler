@@ -1,8 +1,12 @@
 History.txt
+EPL-LICENSE
 Manifest.txt
+MIT-LICENSE
 PostInstall.txt
+README
 README.rdoc
 Rakefile
+TODO
 lib/formatter-0.0.1.jar
 lib/jstyler.rb
 lib/jstyler/beautify.rb
@@ -11,6 +15,7 @@ script/console
 script/destroy
 script/generate
 spec/beautify_spec.rb
+spec/fixture/name/webdizz/styler/fixture/FormatterFixture.java
 spec/formatter_spec.rb
 spec/jstyler_spec.rb
 spec/spec.opts

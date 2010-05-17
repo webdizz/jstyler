@@ -1,2 +1,3 @@
+Usage: buildr format
 
 For more information on jstyler, see http://jstyler.rubyforge.org or http://webdizz.name/posts/jstyler
