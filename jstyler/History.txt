@@ -2,3 +2,16 @@
 
 * 1 major enhancement:
   * Initial release with abilities to format code but there is a lack of configuration.
+
+=== 0.0.2 2010-05-16
+
+* 1 minor enhancement:
+  * Some configurations and documentation was changed
+  
+=== 0.0.3 2010-05-17
+
+* 2 major enhancements:
+  * Formatting configuration options can be defined in several ways.
+  * Built-in formatting styles based on Java and Eclipse conventions were added.
+* 1 minor enhancement:
+  * Documentation was updated.  
