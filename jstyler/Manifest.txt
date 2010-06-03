@@ -2,8 +2,6 @@ EPL-LICENSE
 History.txt
 MIT-LICENSE
 Manifest.txt
-PostInstall.txt
-README
 README.rdoc
 Rakefile
 TODO

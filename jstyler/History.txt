@@ -15,3 +15,8 @@
   * Built-in formatting styles based on Java and Eclipse conventions were added.
 * 1 minor enhancement:
   * Documentation was updated.  
+  
+=== 0.0.4 2010-06-3
+
+* major enhancement:
+  * avoid extracting formatter.jar with included java libraries - helps on Linux to avoid permission issues.
