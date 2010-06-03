@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>name.webdizz.jstyler</groupId>
 	<artifactId>formatter</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.2</version>
 	<description>The Java code formatter for BuildR extension.</description>
 
 	<properties>
@@ -73,11 +73,7 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<mainClass>name.webdizz.styler.StylerRunner</mainClass>
-							<!--
-							<classpathLayoutType>custom</classpathLayoutType>
-							<customClasspathLayout>lib/$${artifact.artifactId}-$${artifact.version}$${dashClassifier?}.$${artifact.extension}</customClasspathLayout>
-							-->
-							<classpathPrefix>lib/</classpathPrefix>
+							<classpathPrefix>./</classpathPrefix>
 						</manifest>
 					</archive>
 				</configuration>
@@ -95,7 +91,7 @@
 							<goal>copy-dependencies</goal>
 						</goals>
 						<configuration>
-							<outputDirectory>${project.build.directory}/classes/lib</outputDirectory>
+							<outputDirectory>${project.build.directory}/libs</outputDirectory>
 							<overWriteReleases>true</overWriteReleases>
 							<overWriteSnapshots>true</overWriteSnapshots>
 							<overWriteIfNewer>true</overWriteIfNewer>
