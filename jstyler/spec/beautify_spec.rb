@@ -8,7 +8,7 @@ describe BeautifyRunner, "when is being ran" do
   
   before do
     @beautify = BeautifyRunner.new
-    @config = File.expand_path $JAVA_LIBS+'/org.eclipse.jdt.core.prefs'
+    @config = File.expand_path GEM_DIRECTORY+'/conventions/java.prefs'
     @src = File.expand_path File.dirname(__FILE__)+'/fixture'
   end
   

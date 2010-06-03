@@ -11,5 +11,4 @@ $:.unshift(File.dirname(__FILE__) + '/../lib')
 require 'rubygems'
 
 require 'jstyler'
-require 'jstyler/formatter'
 require 'jstyler/beautify'

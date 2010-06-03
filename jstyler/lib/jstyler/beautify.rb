@@ -36,12 +36,8 @@ module Jstyler
         if result
           execution_string = flatten_sources srcs
           execution_string = flatten_options(@options) + execution_string
-          # change directory to run command
-          Dir.mkdir $JAVA_LIBS if ! File.exist? $JAVA_LIBS
-          fromatter = Formatter.new
-          fromatter.extract if File.exist? $JAVA_LIBS
           
-          Dir.chdir($JAVA_LIBS)
+          Dir.chdir(JAVA_LIBS)
           java = File.expand_path ENV['JAVA_HOME']+'/bin/java'
           cmd = "#{java} -jar #{FORMATTER_LIB} #{execution_string} "
           shell = Session::Shell.new
@@ -136,7 +132,7 @@ module Jstyler
       
       task 'format' do |task|
         puts "Perform formatting...."
-        $JAVA_LIBS = File.expand_path project.path_to :target
+        JAVA_LIBS = File.expand_path project.path_to :target
         
         runner = BeautifyRunner.new
         sources_to_format = [].concat project.compile.sources
