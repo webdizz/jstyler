@@ -23,9 +23,11 @@ import org.eclipse.osgi.util.NLS;
 import org.eclipse.text.edits.TextEdit;
 
 /**
- * This implementation is based on org.eclipse.jdt.core.formatter.CodeFormatterApplication.
+ * This implementation is based on
+ * org.eclipse.jdt.core.formatter.CodeFormatterApplication.
+ * 
  * @author webdizz
- *
+ * 
  */
 public class JavaCodeFormatterApplication implements IApplication {
 
@@ -71,7 +73,7 @@ public class JavaCodeFormatterApplication implements IApplication {
 		/**
 		 * Bind the given message's substitution locations with the given string
 		 * values.
-		 *
+		 * 
 		 * @param message
 		 *            the message to be manipulated
 		 * @return the manipulated String
@@ -83,7 +85,7 @@ public class JavaCodeFormatterApplication implements IApplication {
 		/**
 		 * Bind the given message's substitution locations with the given string
 		 * values.
-		 *
+		 * 
 		 * @param message
 		 *            the message to be manipulated
 		 * @param binding
@@ -91,15 +93,13 @@ public class JavaCodeFormatterApplication implements IApplication {
 		 * @return the manipulated String
 		 */
 		public static String bind(String message, Object binding) {
-			return bind(message, new Object[] {
-				binding
-			});
+			return bind(message, new Object[] { binding });
 		}
 
 		/**
 		 * Bind the given message's substitution locations with the given string
 		 * values.
-		 *
+		 * 
 		 * @param message
 		 *            the message to be manipulated
 		 * @param binding1
@@ -108,16 +108,15 @@ public class JavaCodeFormatterApplication implements IApplication {
 		 *            A second object to be inserted into the message
 		 * @return the manipulated String
 		 */
-		public static String bind(String message, Object binding1, Object binding2) {
-			return bind(message, new Object[] {
-					binding1, binding2
-			});
+		public static String bind(String message, Object binding1,
+				Object binding2) {
+			return bind(message, new Object[] { binding1, binding2 });
 		}
 
 		/**
 		 * Bind the given message's substitution locations with the given string
 		 * values.
-		 *
+		 * 
 		 * @param message
 		 *            the message to be manipulated
 		 * @param bindings
@@ -174,7 +173,8 @@ public class JavaCodeFormatterApplication implements IApplication {
 			File file = files[i];
 			if (file.isDirectory()) {
 				formatDirTree(file, codeFormatter);
-			} else if (Util.isJavaLikeFileName(file.getPath())) {
+			} else if (name.webdizz.styler.Util.isJavaLikeFileName(file
+					.getPath())) {
 				formatFile(file, codeFormatter);
 			}
 		}
@@ -188,16 +188,24 @@ public class JavaCodeFormatterApplication implements IApplication {
 		try {
 			// read the file
 			if (this.verbose) {
-				System.out.println(Messages.bind(Messages.CommandLineFormatting, file.getAbsolutePath()));
+				System.out
+						.println(Messages.bind(Messages.CommandLineFormatting,
+								file.getAbsolutePath()));
 			}
-			String contents = new String(org.eclipse.jdt.internal.compiler.util.Util.getFileCharContent(file, null));
+			String contents = new String(
+					org.eclipse.jdt.internal.compiler.util.Util
+							.getFileCharContent(file, null));
 			// format the file (the meat and potatoes)
 			doc.set(contents);
-			TextEdit edit = codeFormatter.format(CodeFormatter.K_COMPILATION_UNIT | CodeFormatter.F_INCLUDE_COMMENTS, contents, 0, contents.length(), 0, null);
+			TextEdit edit = codeFormatter.format(
+					CodeFormatter.K_COMPILATION_UNIT
+							| CodeFormatter.F_INCLUDE_COMMENTS, contents, 0,
+					contents.length(), 0, null);
 			if (edit != null) {
 				edit.apply(doc);
 			} else {
-				System.err.println(Messages.bind(Messages.FormatProblem, file.getAbsolutePath()));
+				System.err.println(Messages.bind(Messages.FormatProblem,
+						file.getAbsolutePath()));
 				return;
 			}
 
@@ -214,19 +222,23 @@ public class JavaCodeFormatterApplication implements IApplication {
 				}
 			}
 		} catch (IOException e) {
-			String errorMessage = Messages.bind(Messages.CaughtException, "IOException", e.getLocalizedMessage()); //$NON-NLS-1$
+			String errorMessage = Messages.bind(Messages.CaughtException,
+					"IOException", e.getLocalizedMessage()); //$NON-NLS-1$
 			Util.log(e, errorMessage);
-			System.err.println(Messages.bind(Messages.ExceptionSkip ,errorMessage));
+			System.err.println(Messages.bind(Messages.ExceptionSkip,
+					errorMessage));
 		} catch (BadLocationException e) {
-			String errorMessage = Messages.bind(Messages.CaughtException, "BadLocationException", e.getLocalizedMessage()); //$NON-NLS-1$
+			String errorMessage = Messages.bind(Messages.CaughtException,
+					"BadLocationException", e.getLocalizedMessage()); //$NON-NLS-1$
 			Util.log(e, errorMessage);
-			System.err.println(Messages.bind(Messages.ExceptionSkip ,errorMessage));
+			System.err.println(Messages.bind(Messages.ExceptionSkip,
+					errorMessage));
 		}
 	}
 
 	private File[] processCommandLine(String[] argsArray) {
 
-		ArrayList args = new ArrayList();
+		ArrayList<String> args = new ArrayList<String>();
 		for (int i = 0, max = argsArray.length; i < max; i++) {
 			args.add(argsArray[i]);
 		}
@@ -245,48 +257,52 @@ public class JavaCodeFormatterApplication implements IApplication {
 		loop: while (index < argCount) {
 			String currentArg = argsArray[index++];
 
-			switch(mode) {
-				case DEFAULT_MODE :
-					if (PDE_LAUNCH.equals(currentArg)) {
-						continue loop;
-					}
-					if (ARG_HELP.equals(currentArg)) {
-						displayHelp();
-						return null;
-					}
-					if (ARG_VERBOSE.equals(currentArg)) {
-						this.verbose = true;
-						continue loop;
-					}
-					if (ARG_QUIET.equals(currentArg)) {
-						this.quiet = true;
-						continue loop;
-					}
-					if (ARG_CONFIG.equals(currentArg)) {
-						mode = CONFIG_MODE;
-						continue loop;
-					}
-					// the current arg should be a file or a directory name
-					File file = new File(currentArg);
-					if (file.exists()) {
-						if (filesToFormat.length == fileCounter) {
-							System.arraycopy(filesToFormat, 0, (filesToFormat = new File[fileCounter * 2]), 0, fileCounter);
-						}
-						filesToFormat[fileCounter++] = file;
-					} else {
-						displayHelp(Messages.bind(Messages.CommandLineErrorFile, currentArg));
-						return null;
-					}
-					break;
-				case CONFIG_MODE :
-					this.configName = currentArg;
-					this.options = readConfig(currentArg);
-					if (this.options == null) {
-						displayHelp(Messages.bind(Messages.CommandLineErrorConfig, currentArg));
-						return null;
-					}
-					mode = DEFAULT_MODE;
+			switch (mode) {
+			case DEFAULT_MODE:
+				if (PDE_LAUNCH.equals(currentArg)) {
 					continue loop;
+				}
+				if (ARG_HELP.equals(currentArg)) {
+					displayHelp();
+					return null;
+				}
+				if (ARG_VERBOSE.equals(currentArg)) {
+					this.verbose = true;
+					continue loop;
+				}
+				if (ARG_QUIET.equals(currentArg)) {
+					this.quiet = true;
+					continue loop;
+				}
+				if (ARG_CONFIG.equals(currentArg)) {
+					mode = CONFIG_MODE;
+					continue loop;
+				}
+				// the current arg should be a file or a directory name
+				File file = new File(currentArg);
+				if (file.exists()) {
+					if (filesToFormat.length == fileCounter) {
+						System.arraycopy(filesToFormat, 0,
+								(filesToFormat = new File[fileCounter * 2]), 0,
+								fileCounter);
+					}
+					filesToFormat[fileCounter++] = file;
+				} else {
+					displayHelp(Messages.bind(Messages.CommandLineErrorFile,
+							currentArg));
+					return null;
+				}
+				break;
+			case CONFIG_MODE:
+				this.configName = currentArg;
+				this.options = readConfig(currentArg);
+				if (this.options == null) {
+					displayHelp(Messages.bind(Messages.CommandLineErrorConfig,
+							currentArg));
+					return null;
+				}
+				mode = DEFAULT_MODE;
+				continue loop;
 			}
 		}
 
@@ -295,11 +311,8 @@ public class JavaCodeFormatterApplication implements IApplication {
 			return null;
 		}
 		if (this.quiet && this.verbose) {
-			displayHelp(
-				Messages.bind(
-					Messages.CommandLineErrorQuietVerbose,
-					new String[] { ARG_QUIET, ARG_VERBOSE }
-				));
+			displayHelp(Messages.bind(Messages.CommandLineErrorQuietVerbose,
+					new String[] { ARG_QUIET, ARG_VERBOSE }));
 			return null;
 		}
 		if (fileCounter == 0) {
@@ -307,7 +320,8 @@ public class JavaCodeFormatterApplication implements IApplication {
 			return null;
 		}
 		if (filesToFormat.length != fileCounter) {
-			System.arraycopy(filesToFormat, 0, (filesToFormat = new File[fileCounter]), 0, fileCounter);
+			System.arraycopy(filesToFormat, 0,
+					(filesToFormat = new File[fileCounter]), 0, fileCounter);
 		}
 		return filesToFormat;
 	}
@@ -319,7 +333,8 @@ public class JavaCodeFormatterApplication implements IApplication {
 	private Properties readConfig(String filename) {
 		BufferedInputStream stream = null;
 		try {
-			stream = new BufferedInputStream(new FileInputStream(new File(filename)));
+			stream = new BufferedInputStream(new FileInputStream(new File(
+					filename)));
 			final Properties formatterOptions = new Properties();
 			formatterOptions.load(stream);
 			return formatterOptions;
@@ -341,7 +356,8 @@ public class JavaCodeFormatterApplication implements IApplication {
 	 * Runs the Java code formatter application
 	 */
 	public Object start(IApplicationContext context) throws Exception {
-		File[] filesToFormat = processCommandLine((String[]) context.getArguments().get(IApplicationContext.APPLICATION_ARGS));
+		File[] filesToFormat = processCommandLine((String[]) context
+				.getArguments().get(IApplicationContext.APPLICATION_ARGS));
 
 		if (filesToFormat == null) {
 			return IApplication.EXIT_OK;
@@ -349,18 +365,21 @@ public class JavaCodeFormatterApplication implements IApplication {
 
 		if (!this.quiet) {
 			if (this.configName != null) {
-				System.out.println(Messages.bind(Messages.CommandLineConfigFile, this.configName));
+				System.out.println(Messages.bind(
+						Messages.CommandLineConfigFile, this.configName));
 			}
 			System.out.println(Messages.bind(Messages.CommandLineStart));
 		}
 
-		final CodeFormatter codeFormatter = ToolFactory.createCodeFormatter(this.options);
+		final CodeFormatter codeFormatter = ToolFactory
+				.createCodeFormatter(this.options);
 		// format the list of files and/or directories
 		for (int i = 0, max = filesToFormat.length; i < max; i++) {
 			final File file = filesToFormat[i];
 			if (file.isDirectory()) {
 				formatDirTree(file, codeFormatter);
-			} else if (Util.isJavaLikeFileName(file.getPath())) {
+			} else if (name.webdizz.styler.Util.isJavaLikeFileName(file
+					.getPath())) {
 				formatFile(file, codeFormatter);
 			}
 		}
@@ -370,6 +389,7 @@ public class JavaCodeFormatterApplication implements IApplication {
 
 		return IApplication.EXIT_OK;
 	}
+
 	public void stop() {
 		// do nothing
 	}
