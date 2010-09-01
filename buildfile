@@ -23,11 +23,15 @@ define "jstyler" do
   project.version = VERSION_NUMBER
   project.group = GROUP
   manifest["Implementation-Vendor"] = COPYRIGHT
+  manifest["Main-Class"] = "name.webdizz.styler.StylerRunner"
 
   define "formatter" do
     compile.with COMPILE_DEPS
     test.compile.with COMPILE_DEPS
-    package(:jar)
+    pack = package(:jar){|project|
+	puts 'hello'
+    }
+    pack.merge(COMPILE_DEPS).exclude('*.profile', '*.list', '*.jar', '*.html', '*.xml', 'plugin.properties', 'systembundle.properties')
   end
 
 end
