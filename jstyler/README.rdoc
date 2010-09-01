@@ -48,7 +48,7 @@ Third-party dependencies are under Eclipse Public License v1.0
 
 (The MIT License)
 
-Copyright (c) 2010 Izzet Mustafaiev
+Copyright (c) 2010 Izzet Mustafa
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
