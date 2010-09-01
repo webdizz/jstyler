@@ -1,10 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" output="target/classes" path="src/main/java"/>
-	<classpathentry kind="src" path="src/test/java"/>
-	<classpathentry kind="src" path="fixture"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.4"/>
-	<classpathentry kind="con" path="org.maven.ide.eclipse.MAVEN2_CLASSPATH_CONTAINER"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="output" path="target/classes"/>
+  <classpathentry kind="src" path="src/main/java" excluding="**/.svn/|**/CVS/"/>
+  <classpathentry kind="src" output="target/resources" path="src/main/resources" excluding="**/.svn/|**/CVS/"/>
+  <classpathentry kind="src" output="target/test/classes" path="src/test/java" excluding="**/.svn/|**/CVS/"/>
+  <classpathentry kind="output" path="target/classes"/>
+  <classpathentry kind="var" sourcepath="M2_REPO/org/eclipse/osgi/osgi/3.6.0.v20100517/osgi-3.6.0.v20100517-sources.jar" path="M2_REPO/org/eclipse/osgi/osgi/3.6.0.v20100517/osgi-3.6.0.v20100517.jar"/>
+  <classpathentry kind="var" sourcepath="M2_REPO/org/eclipse/equinox/equinox.app/1.3.0.v20100512/equinox.app-1.3.0.v20100512-sources.jar" path="M2_REPO/org/eclipse/equinox/equinox.app/1.3.0.v20100512/equinox.app-1.3.0.v20100512.jar"/>
+  <classpathentry kind="var" sourcepath="M2_REPO/org/eclipse/jdt/jdt.core/3.6.0.v_A58/jdt.core-3.6.0.v_A58-sources.jar" path="M2_REPO/org/eclipse/jdt/jdt.core/3.6.0.v_A58/jdt.core-3.6.0.v_A58.jar"/>
+  <classpathentry kind="var" sourcepath="M2_REPO/junit/junit/4.7/junit-4.7-sources.jar" path="M2_REPO/junit/junit/4.7/junit-4.7.jar"/>
+  <classpathentry kind="var" sourcepath="M2_REPO/org/jmock/jmock/2.5.1/jmock-2.5.1-sources.jar" path="M2_REPO/org/jmock/jmock/2.5.1/jmock-2.5.1.jar"/>
+  <classpathentry kind="var" sourcepath="M2_REPO/org/jmock/jmock-junit4/2.5.1/jmock-junit4-2.5.1-sources.jar" path="M2_REPO/org/jmock/jmock-junit4/2.5.1/jmock-junit4-2.5.1.jar"/>
+  <classpathentry kind="var" sourcepath="M2_REPO/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1-sources.jar" path="M2_REPO/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar"/>
+  <classpathentry kind="var" sourcepath="M2_REPO/org/hamcrest/hamcrest-library/1.1/hamcrest-library-1.1-sources.jar" path="M2_REPO/org/hamcrest/hamcrest-library/1.1/hamcrest-library-1.1.jar"/>
+  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 </classpath>
