@@ -35,8 +35,6 @@ define "jstyler" do
     compile.with COMPILE_DEPS
     test.compile.with COMPILE_DEPS
     pack = package(:jar)
-    #pack.with :manifest => _('src/main/resources/META-INF/MANIFEST.MF')
-    #pack.merge(COMPILE_DEPS).exclude('*.profile', '*.list', '*.jar', '*.html', '*.xml', 'plugin.properties', 'systembundle.properties')
   end
 
   define "jstyler" do
@@ -47,12 +45,15 @@ define "jstyler" do
    
     # copy libs 
     task :prepare_libs do |task|
+	project(:formatter).package
 	jar = project(:formatter).package.to_s
         FileUtils.cp jar, project._(:javalibs)
-        FileUtils.cp_r Dir.glob(project._('../lib/*.jar')), project._(:javalibs)
+	COMPILE_DEPS.each{|artifact|
+		FileUtils.cp_r artifact.name, project._(:javalibs)
+	}
     end
     
-    task(:test=>:prepare_libs)
+    task(:package=>:prepare_libs)
 
     # run specs
     test.enhance{|prj|

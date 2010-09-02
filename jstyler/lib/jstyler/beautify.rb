@@ -3,6 +3,8 @@
 require 'buildr'
 require 'session'
 
+include Jstyler
+
 module Jstyler
   
   module Beautify
@@ -10,8 +12,6 @@ module Jstyler
     include Extension
     
     class BeautifyRunner
-      
-      include Jstyler
       
       def initialize
         @conventions = ['java', 'eclipse']
@@ -39,7 +39,7 @@ module Jstyler
           
           Dir.chdir(JAVA_LIBS)
           java = File.expand_path ENV['JAVA_HOME']+'/bin/java'
-          cmd = "#{java} -jar #{FORMATTER_LIB} #{execution_string} "
+          cmd = "#{java} -jar #{Jstyler.FORMATTER_LIB} #{execution_string} "
           shell = Session::Shell.new
           stdout, stderr = shell.execute cmd
           status = shell.status 
