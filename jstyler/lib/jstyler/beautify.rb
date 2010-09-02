@@ -132,8 +132,6 @@ module Jstyler
       
       task 'format' do |task|
         puts "Perform formatting...."
-        JAVA_LIBS = File.expand_path project.path_to :target
-        
         runner = BeautifyRunner.new
         sources_to_format = [].concat project.compile.sources
         sources_to_format.concat project.test.compile.sources if ! project.test.compile.sources.empty?
