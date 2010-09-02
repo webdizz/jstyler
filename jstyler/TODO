@@ -1,3 +1,4 @@
 == TODO list
 
 * Avoid reformatting already formatted and unchanged file.
+* Add support for scala and groovy
