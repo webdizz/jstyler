@@ -5,12 +5,10 @@ VERSION_NUMBER = '1.0'
 jstyler.options[:convention] = 'java'
 jstyler.options[:verbose] = true
 
-define 'testsrc' do
-	
-	#extend Jstyler::Beautify
+define 'testable' do
 	
 	project.version = VERSION_NUMBER
-  	project.group = 'name.webdizz.jstyler'
+  	project.group = 'name.webdizz.jstyler.testable'
 	compile.options.target = '1.5'
 	package :jar
 
