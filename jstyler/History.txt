@@ -16,7 +16,15 @@
 * 1 minor enhancement:
   * Documentation was updated.  
   
-=== 0.0.4 2010-06-3
+=== 0.0.4 2010-06-03
 
 * major enhancement:
   * avoid extracting formatter.jar with included java libraries - helps on Linux to avoid permission issues.
+  
+=== 0.0.5 2010-09-02
+
+* major enhancements:
+  * dependencies were updated to Eclipse 3.6 Helios
+  * dynamic resolving of the formatter lib within javalibs folder
+  * changes to support formatters for different languages
+  

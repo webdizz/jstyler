@@ -6,6 +6,7 @@ package name.webdizz.styler;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
 import org.osgi.framework.Bundle;
 
@@ -15,100 +16,105 @@ import org.osgi.framework.Bundle;
  */
 public class StylerApplicationContext implements IApplicationContext {
 
-    public static final String ARG_CONFIG = "-config";
+	public static final String ARG_CONFIG = "-config";
 
-    public static final String ARG_HELP = "-help";
+	public static final String ARG_HELP = "-help";
 
-    public static final String ARG_QUIET = "-quiet";
+	public static final String ARG_QUIET = "-quiet";
 
-    public static final String ARG_VERBOSE = "-verbose";
-    
-    public static final String PDE_LAUNCH = "-pdelaunch";
+	public static final String ARG_VERBOSE = "-verbose";
 
-    private Map<String, String[]> arguments = new HashMap<String, String[]>();
+	public static final String PDE_LAUNCH = "-pdelaunch";
 
-    public StylerApplicationContext(final Map<String, String[]> arguments) {
-	super();
-	this.arguments = arguments;
-    }
+	private Map<String, String[]> arguments = new HashMap<String, String[]>();
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.eclipse.equinox.app.IApplicationContext#applicationRunning()
-     */
-    public void applicationRunning() {
-    }
+	public StylerApplicationContext(final Map<String, String[]> arguments) {
+		super();
+		this.arguments = arguments;
+	}
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.eclipse.equinox.app.IApplicationContext#getArguments()
-     */
-    public Map<String, String[]> getArguments() {
-	return arguments;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.equinox.app.IApplicationContext#applicationRunning()
+	 */
+	public void applicationRunning() {
+	}
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.eclipse.equinox.app.IApplicationContext#getBrandingApplication()
-     */
-    public String getBrandingApplication() {
-	// TODO Auto-generated method stub
-	return null;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.equinox.app.IApplicationContext#getArguments()
+	 */
+	public Map<String, String[]> getArguments() {
+		return arguments;
+	}
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.eclipse.equinox.app.IApplicationContext#getBrandingBundle()
-     */
-    public Bundle getBrandingBundle() {
-	// TODO Auto-generated method stub
-	return null;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.equinox.app.IApplicationContext#getBrandingApplication()
+	 */
+	public String getBrandingApplication() {
+		return "jStyler";
+	}
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.eclipse.equinox.app.IApplicationContext#getBrandingDescription()
-     */
-    public String getBrandingDescription() {
-	// TODO Auto-generated method stub
-	return null;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.equinox.app.IApplicationContext#getBrandingBundle()
+	 */
+	public Bundle getBrandingBundle() {
+		return null;
+	}
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.eclipse.equinox.app.IApplicationContext#getBrandingId()
-     */
-    public String getBrandingId() {
-	// TODO Auto-generated method stub
-	return null;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.equinox.app.IApplicationContext#getBrandingDescription()
+	 */
+	public String getBrandingDescription() {
+		return "jStyler - formatter for BuildR";
+	}
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.eclipse.equinox.app.IApplicationContext#getBrandingName()
-     */
-    public String getBrandingName() {
-	// TODO Auto-generated method stub
-	return null;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.equinox.app.IApplicationContext#getBrandingId()
+	 */
+	public String getBrandingId() {
+		return "jStyler";
+	}
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * org.eclipse.equinox.app.IApplicationContext#getBrandingProperty(java.
-     * lang.String)
-     */
-    public String getBrandingProperty(String arg0) {
-	// TODO Auto-generated method stub
-	return null;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.equinox.app.IApplicationContext#getBrandingName()
+	 */
+	public String getBrandingName() {
+		return "jStyler";
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.equinox.app.IApplicationContext#getBrandingProperty(java.
+	 * lang.String)
+	 */
+	public String getBrandingProperty(String property) {
+		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.equinox.app.IApplicationContext#setResult(java.lang.Object,
+	 * org.eclipse.equinox.app.IApplication)
+	 */
+	public void setResult(Object arg0, IApplication arg1) {
+		// we do not supprt this method
+	}
 
 }
